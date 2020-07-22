@@ -7,31 +7,41 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            var student = new List<Student>();
-            var adding = true;
-            while (adding)
-            {
-                var newStudent = new Student();
+            var square = new Square() { Width = 2 };
+            var triangle = new Triangle() { Base = 2, Height = 5 };
+            var person = new { name = "Alex", age = 35 };//anonymous data type
 
-                Console.Write("Student Name: ");
-                newStudent.Name = Console.ReadLine();
-
-                Console.Write("Student Grade: ");
-                newStudent.Grade = int.Parse(Console.ReadLine());
-
-                Console.Write("Add another? y/n");
-                if(Console.ReadLine() != "y")
-                {
-                    //
-                }
-            }
+            square.Display();
+            triangle.Display();
+        }
     }
-    class Student
+
+    abstract class Shape
     {
-        public string Name;
-        public string Birthday;
-        public string Address;
-        public int Grade;
-        public int Phone;
+        public abstract int GetArea();
+        public void Display()
+        {
+            Console.WriteLine("The area is {0}", GetArea());
+        }
+    }
+
+    class Square : Shape
+    {
+        public int Width;
+        public override int GetArea()
+        {
+            return Width * Width;
+        }
+    }
+
+    class Triangle : Shape
+    {
+        public int Base;
+        public int Height;
+
+        public override int GetArea()
+        {
+            return (Base * Height) / 2;
+        }
     }
 }
